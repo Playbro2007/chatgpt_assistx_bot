@@ -7,17 +7,17 @@ BOT_TOKEN = os.getenv("BOT_TOKEN") or os.getenv("API_TOKEN")
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "Hello! I am ChatGPT Assistant 🤖\n\n"
-        "I am online and working. Send me any message."
+        "Привет! Я ChatGPT Assistant 🤖\n\n"
+        "Я запущен и работаю. Напиши мне любое сообщение."
     )
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "Commands:\n"
-        "/start - start the bot\n"
-        "/help - show help\n\n"
-        "This is a test version without ChatGPT yet."
+        "Команды:\n"
+        "/start — запустить бота\n"
+        "/help — помощь\n\n"
+        "Пока это тестовая версия без ChatGPT. Главное — мы проверили, что бот работает."
     )
 
 
@@ -25,15 +25,15 @@ async def answer(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
 
     await update.message.reply_text(
-        "I received your message:\n\n"
+        "Я получил твоё сообщение:\n\n"
         f"{text}\n\n"
-        "The bot is working ✅"
+        "Бот работает ✅"
     )
 
 
 def main():
     if not BOT_TOKEN:
-        raise ValueError("Telegram token was not found. BOT_TOKEN or API_TOKEN is missing.")
+        raise ValueError("Токен Telegram не найден. Нужен BOT_TOKEN или API_TOKEN.")
 
     app = ApplicationBuilder().token(BOT_TOKEN).build()
 
@@ -41,7 +41,7 @@ def main():
     app.add_handler(CommandHandler("help", help_command))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, answer))
 
-    print("Bot is running...")
+    print("Бот запущен...")
     app.run_polling()
 
 
